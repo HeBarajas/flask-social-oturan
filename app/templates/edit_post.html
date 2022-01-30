@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Edit {{ posts.name }} info!</h1>
+
+    <form action="" method="post">
+        {{ form.csrf_token }}
+        <div class="form-group">
+            <fieldset>
+                {{ form.title.label }}
+                {{ form.title(class='form-control', value=posts.title) }}
+            </fieldset>
+            <fieldset>
+                {{ form.text.label }}
+                {{ form.text(class='form-control', value=posts.text) }}
+            </fieldset>
+        </div>
+        {{ form.submit(class='btn btn-primary') }}
+    </form>
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletePostModal">
+        Delete Post
+    </button>
+  
+    <!-- Modal -->
+    <div class="modal fade" id="deletePostModal" tabindex="-1" aria-labelledby="deletePostModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="deletePostLabel">Delete {{ posts.name }}?</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            You are about to delete {{ posts.name }}. This action cannot be undone. Are you sure?
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, I am not sure</button>
+            <a href="{{ url_for('delete_post', p_id=posts.id) }}" class="btn btn-danger">Yes, delete it!</a>
+            </div>
+        </div>
+        </div>
+    </div>
+{% endblock %}

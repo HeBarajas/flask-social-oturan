@@ -1,0 +1,4 @@
+kekambas_venv/
+__pycache__/
+config.py/
+.env
